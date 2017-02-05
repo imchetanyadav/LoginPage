@@ -3,7 +3,7 @@ function progress() {
     var progressdiv = document.getElementsByClassName("progress")[0];    
     var containerdiv = document.getElementsByClassName("container")[0];
     
-    var maxHeight = containerdiv.offsetHeight;
+    var maxHeight = containerdiv.clientHeight;
     
     containerdiv.style.display = "none";
     progressdiv.style.display = "block";    
