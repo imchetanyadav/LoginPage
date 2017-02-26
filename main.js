@@ -23,6 +23,7 @@ function progress() {
     function increaseheightMobile() {
         if (height >= 100) {
             clearInterval(hid);
+            wid = setInterval(increasewidth, 20);
         } else {
             height++; 
             elem[0].style.height = height + '%';
@@ -33,6 +34,7 @@ function progress() {
     function increaseheightDesktop() {
         if (height >= maxHeight) {
             clearInterval(hid);
+            wid = setInterval(increasewidth, 20);
         } else {
             height++; 
             elem[0].style.height = height + 'px';
@@ -41,12 +43,10 @@ function progress() {
     }
 
     /* Increasing width after height is 100% */
-    setTimeout(function(){
-        wid = setInterval(increasewidth, 20);
-    }, 2800);
     function increasewidth() {
         if (width >= 50) {
             clearInterval(wid);
+            decrease();
         } else {
             width++; 
             elem[0].style.width = width + '%';
@@ -55,11 +55,10 @@ function progress() {
     }
 
     /* Decreasing width/height based on the window size */
-    setTimeout(function(){
+    function decrease(){
         if( window.innerWidth <= 767){
             containerdiv.style.display = "block";
             progressdiv.style.backgroundColor = "transparent";
-            console.log(hid);
             hid = setInterval(decreaseheight, 10);
         }
         else if( window.innerWidth > 767){
@@ -71,11 +70,12 @@ function progress() {
             elem[1].style.float = "right";
             wid = setInterval(decreasewidth, 20);
         }
-    }, 3800);
+    }
 
     function decreaseheight() {
         if (height <= 0) {
             clearInterval(hid);
+            showMainContent();
         } else {
             height--; 
             elem[0].style.height = height + '%';
@@ -86,6 +86,7 @@ function progress() {
     function decreasewidth() {
         if (width <= 0) {
             clearInterval(wid);
+            showMainContent();
         } else {
             width--; 
             elem[0].style.width = width + '%';
@@ -94,12 +95,12 @@ function progress() {
     }
 
     /* Removing progress screen and show main content */
-    setTimeout(function(){
+    function showMainContent(){
         progressdiv.style.display = "none";
         var anim = document.getElementsByClassName("animated");
         for(i=0; i<anim.length; i++)
             anim[i].style.animationPlayState = "running";
-    }, 5600);
+    }
 
 }
 /* Starting fake loading screen */
